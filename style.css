@@ -1,0 +1,51 @@
+table, td, th {
+  border: 1px solid black;
+}
+td, th {
+  padding: 10px;
+}
+td {
+  text-align: center;
+}
+th {
+  background-color: goldenrod;
+}
+table {
+  border-collapse: collapse;
+}
+button {
+  border-radius: 5px;
+  border: none;
+  padding: 15px;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+}
+.sidebarDiv {
+  position:relative;
+  margin: 0px 10px;
+}
+.programDiv {
+ display:grid;
+ grid-template-columns: 1fr minmax(250px, 30%);
+ gap: 20px;
+}
+.unread {
+  background-color: red;
+}
+.read {
+  background-color: green;
+}
+#addBookBtn {
+  background-color: rgb(255, 243, 11);
+}
+.btn-div {
+  display:flex;
+  justify-content: center;
+}
+.btn-div button {
+  width: 130px;
+}

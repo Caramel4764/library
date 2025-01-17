@@ -7,24 +7,30 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Author</th>
-        <th>Finished</th>
-      </tr>
-    </thead>
-    <tbody id="bookInfo">
-    </tbody>
-  </table>
-  <label for="name">Name</label>
-  <input id="name" type="text">
-  <label for="author">Author</label>
-  <input id="author" type="text">
-  <button id="isFinishedIndicator">Unread</button>
+  <div class="programDiv">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Finished</th>
+        </tr>
+      </thead>
+      <tbody id="bookInfo">
+      </tbody>
+    </table>
+    <div class="sidebarDiv">
+      <div class="sidebar">
+        <label for="name">Name</label>
+        <input id="name" type="text">
+        <label for="author">Author</label>
+        <input id="author" type="text">
+        <div class="btn-div"><button id="isFinishedIndicator" class="unread">Unread</button></div>
+        <div class="btn-div"><button id="addBookBtn">Add New Book</button></div>
+      </div>
+    </div>
+  </div>
 
-  <button id="addBookBtn">Add New Book</button>
   <script src="./index.js"></script>
 </body>
 </html>

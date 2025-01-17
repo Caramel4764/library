@@ -36,7 +36,12 @@ isFinishedIndicator.addEventListener("click", function () {
   isReadBtn = !isReadBtn;
   if (isReadBtn) {
     isFinishedIndicator.textContent = "Read";
+    isFinishedIndicator.classList.add("read");
+    isFinishedIndicator.classList.remove("unread");
+
   } else {
     isFinishedIndicator.textContent = "Unread";
+    isFinishedIndicator.classList.add("unread");
+    isFinishedIndicator.classList.remove("read");
   }
 })
