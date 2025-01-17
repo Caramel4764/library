@@ -1,36 +1,28 @@
-const myLibrary = [];
+let myLibrary = [];
 const bookInfoContainer = document.getElementById("bookInfo");
 const addBookBtn = document.getElementById("addBookBtn");
 const isFinishedIndicator = document.getElementById("isFinishedIndicator");
 const bookName = document.getElementById("name");
 const bookAuthor = document.getElementById("author");
-
+const bookPages = document.getElementById("pages");
 let isReadBtn = false;
-
+let bookCount = 0;
 addBookBtn.addEventListener("click", function() {
-  let newBook = new Book(bookName.value, bookAuthor.value, isReadBtn);
+  bookCount++;
+  let newBook = new Book(bookName.value, bookAuthor.value, bookPages.value, isReadBtn);
   addBookToLibrary(newBook);
 })
-function Book(name, author, isRead) {
+function Book(name, author, pages, isRead) {
   this.name = name;
   this.author = author;
   this.isRead = isRead || false;
-  this.index = myLibrary.length;
+  this.pages = pages;
+  this.index = bookCount;
 }
 
 function addBookToLibrary(newBook) {
   myLibrary.push(newBook);
-  let bookInfo = document.createElement("tr");
-  let name = document.createElement("td");
-  name.textContent=newBook.name;
-  bookInfo.appendChild(name);
-  let author = document.createElement("td");
-  author.textContent = newBook.author;
-  bookInfo.appendChild(author);
-  let isRead = document.createElement("td");
-  isRead.textContent = newBook.isRead;
-  bookInfo.appendChild(isRead);
-  bookInfoContainer.appendChild(bookInfo);
+  rerenderBookTable();
 }
 isFinishedIndicator.addEventListener("click", function () {
   isReadBtn = !isReadBtn;
@@ -45,3 +37,40 @@ isFinishedIndicator.addEventListener("click", function () {
     isFinishedIndicator.classList.remove("read");
   }
 })
+
+function deleteBook(index) {
+  myLibrary.forEach((book, i) => {
+    if (book.index == index) {
+      myLibrary = myLibrary.slice(0, i).concat(myLibrary.slice(i+1,book.length));
+      rerenderBookTable();
+    }
+  })
+}
+
+function rerenderBookTable() {
+  bookInfoContainer.textContent="";
+  for (let i = 0; i<myLibrary.length; i++) {
+    let bookInfo = document.createElement("tr");
+    let name = document.createElement("td");
+    name.textContent=myLibrary[i].name;
+    bookInfo.appendChild(name);
+    let author = document.createElement("td");
+    author.textContent = myLibrary[i].author;
+    bookInfo.appendChild(author);
+    let pages = document.createElement("td");
+    pages.textContent = myLibrary[i].pages;
+    bookInfo.appendChild(pages);
+    let isRead = document.createElement("td");
+    isRead.textContent = myLibrary[i].isRead;
+    bookInfo.appendChild(isRead);
+    let deleteTd = document.createElement('td');
+    let deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "X";
+    deleteBtn.addEventListener('click', function() {
+      deleteBook(myLibrary[i].index);
+    });
+    deleteTd.appendChild(deleteBtn);
+    bookInfo.appendChild(deleteTd);
+    bookInfoContainer.appendChild(bookInfo);
+  }
+}
