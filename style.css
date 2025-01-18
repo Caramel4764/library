@@ -1,5 +1,36 @@
-table, td, th {
-  border: 1px solid black;
+:root {
+  --table-radius: 8px;
+  font-family:sans-serif;
+}
+table {
+  table-layout:fixed;
+  width: 100%;
+  font-size: 12px;
+  position: absolute;
+}
+body {
+  background-color: rgb(213, 213, 213);
+}
+td {
+  background-color: white;
+}
+td:nth-child(even){
+  background-color: rgb(239, 239, 239);
+}
+th {
+  font-size: 13px;
+}
+th:first-of-type {
+  border-top-left-radius: var(--table-radius);
+}
+th:last-of-type {
+  border-top-right-radius: var(--table-radius);
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: var(--table-radius);
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: var(--table-radius);
 }
 td, th {
   padding: 10px;
@@ -9,6 +40,9 @@ td {
 }
 th {
   background-color: goldenrod;
+}
+th:nth-child(even) {
+  background-color: rgb(194, 148, 33);
 }
 table {
   border-collapse: collapse;
@@ -22,25 +56,36 @@ button {
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 20px);
+  height: calc(100% - 10px);
+  justify-content: center;
+  gap: 10px;
+}
+.table-div {
+  position: relative;
 }
 .sidebarDiv {
   position:relative;
-  margin: 0px 10px;
+  width: calc(100% - 20px);
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 8px;
+  height: 310px;
 }
 .programDiv {
  display:grid;
  grid-template-columns: 1fr minmax(250px, 30%);
  gap: 20px;
 }
-.unread {
-  background-color: red;
+.red {
+  background-color: rgb(238, 53, 53);
 }
+
 .read {
-  background-color: green;
+  background-color: rgb(72, 171, 72);
 }
 #addBookBtn {
-  background-color: rgb(255, 243, 11);
+  background-color: rgb(255, 249, 139);
 }
 .btn-div {
   display:flex;
@@ -48,4 +93,16 @@ button {
 }
 .btn-div button {
   width: 130px;
+}
+.del-btn {
+  width: 10px;
+  height: 10px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.f-center {
+  display:flex;
+  justify-content: center;
 }

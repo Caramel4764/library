@@ -29,11 +29,11 @@ isFinishedIndicator.addEventListener("click", function () {
   if (isReadBtn) {
     isFinishedIndicator.textContent = "Read";
     isFinishedIndicator.classList.add("read");
-    isFinishedIndicator.classList.remove("unread");
+    isFinishedIndicator.classList.remove("red");
 
   } else {
     isFinishedIndicator.textContent = "Unread";
-    isFinishedIndicator.classList.add("unread");
+    isFinishedIndicator.classList.add("red");
     isFinishedIndicator.classList.remove("read");
   }
 })
@@ -52,24 +52,38 @@ function rerenderBookTable() {
   for (let i = 0; i<myLibrary.length; i++) {
     let bookInfo = document.createElement("tr");
     let name = document.createElement("td");
-    name.textContent=myLibrary[i].name;
+    name.textContent = myLibrary[i].name;
+    name.setAttribute("colspan", "5");
     bookInfo.appendChild(name);
     let author = document.createElement("td");
+    author.setAttribute("colspan", "5");
+
     author.textContent = myLibrary[i].author;
     bookInfo.appendChild(author);
     let pages = document.createElement("td");
     pages.textContent = myLibrary[i].pages;
+    pages.setAttribute("colspan", "2");
+
     bookInfo.appendChild(pages);
     let isRead = document.createElement("td");
     isRead.textContent = myLibrary[i].isRead;
+    isRead.setAttribute("colspan", "2");
+
     bookInfo.appendChild(isRead);
     let deleteTd = document.createElement('td');
+    deleteTd.setAttribute("colspan", "1");
+
     let deleteBtn = document.createElement('button');
+    let deleteBtnDiv = document.createElement("div");
+    deleteBtnDiv.classList.add("f-center");
     deleteBtn.textContent = "X";
+    deleteBtn.classList.add("del-btn");
+    deleteBtn.classList.add("red");
     deleteBtn.addEventListener('click', function() {
       deleteBook(myLibrary[i].index);
     });
-    deleteTd.appendChild(deleteBtn);
+    deleteBtnDiv.appendChild(deleteBtn);
+    deleteTd.appendChild(deleteBtnDiv);
     bookInfo.appendChild(deleteTd);
     bookInfoContainer.appendChild(bookInfo);
   }
