@@ -24,18 +24,27 @@ function addBookToLibrary(newBook) {
   myLibrary.push(newBook);
   rerenderBookTable();
 }
-isFinishedIndicator.addEventListener("click", function () {
-  isReadBtn = !isReadBtn;
-  if (isReadBtn) {
-    isFinishedIndicator.textContent = "Read";
-    isFinishedIndicator.classList.add("read");
-    isFinishedIndicator.classList.remove("red");
+function toggleRead(element, bool, parent) {
+  this.parent = parent||undefined;
+  console.log(element.textContent)
+  if (element.textContent != "Read") {
+    element.textContent = "Read";
+    element.classList.add("read");
+    element.classList.remove("red");
 
   } else {
-    isFinishedIndicator.textContent = "Unread";
-    isFinishedIndicator.classList.add("red");
-    isFinishedIndicator.classList.remove("read");
+    element.textContent = "Unread";
+    element.classList.add("red");
+    element.classList.remove("read");
   }
+  if (parent) {
+    parent.appendChild(element);
+  }
+
+}
+isFinishedIndicator.addEventListener("click", function () {
+  isReadBtn = !isReadBtn;
+  toggleRead(isFinishedIndicator, isReadBtn);
 })
 
 function deleteBook(index) {
@@ -66,9 +75,20 @@ function rerenderBookTable() {
 
     bookInfo.appendChild(pages);
     let isRead = document.createElement("td");
-    isRead.textContent = myLibrary[i].isRead;
-    isRead.setAttribute("colspan", "2");
+    let isReadBtnTog = document.createElement("button");
+    if (myLibrary[i].isRead) {
+      isReadBtnTog.classList.add("read");
+      isReadBtnTog.textContent = "Read";
+    } else {
+      isReadBtnTog.classList.add("red");
+      isReadBtnTog.textContent = "Unread";
+    }
 
+    isRead.setAttribute("colspan", "2");
+    isReadBtnTog.addEventListener("click", function() {
+      toggleRead(isReadBtnTog, myLibrary[i].isRead);
+    });
+    isRead.appendChild(isReadBtnTog);
     bookInfo.appendChild(isRead);
     let deleteTd = document.createElement('td');
     deleteTd.setAttribute("colspan", "1");
